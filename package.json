@@ -2,7 +2,7 @@
   "name": "collect-transform-stream",
   "description": "create a transform stream that runs a function over all collected elements",
   "author": "Stephen Whitmore <sww@eight.net>",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "repository": {
     "url": "git://github.com/noffle/collect-transform-stream.git"
   },

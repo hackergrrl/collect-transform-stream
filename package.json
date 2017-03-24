@@ -15,6 +15,7 @@
   },
   "keywords": [],
   "dependencies": {
+    "once": "^1.4.0",
     "through2": "^2.0.3"
   },
   "devDependencies": {

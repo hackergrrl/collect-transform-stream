@@ -1,4 +1,5 @@
 var through = require('through2')
+var once = require('once')
 
 // Transform stream that performs 'fn' on an array of all elements in the
 // stream, and then passes on the resulting array onto the other end of the
@@ -12,12 +13,18 @@ module.exports = function (fn) {
   }
 
   function end (flush) {
-    elements = fn(elements)
     var that = this
-    elements.forEach(function (elm) {
-      that.push(elm)
-    })
-    flush()
+
+    done = once(done)
+    elements = fn(elements, done)
+    if (elements) done(null, elements)
+
+    function done (err, elements) {
+      elements.forEach(function (elm) {
+        that.push(elm)
+      })
+      flush()
+    }
   }
 
   return through.obj(write, end)

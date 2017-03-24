@@ -21,23 +21,22 @@ pump(source, collectAndFilter, transform, destination)
 ## Usage
 
 ```js
-var collect = require('collect-transform-stream')
 var uniq = require('uniq')
 var from = require('from2')
+var collect = require('concat-stream')
+var collectTransform = require('collect-transform-stream')
 
-var source = from.obj(new Array(100).fill(0).map(function () {
+var source = from.obj(new Array(500).fill(0).map(function () {
   return Math.floor(Math.random() * 10)
 }))
 
-var dedupe = collect(function (nums) {
+var dedupe = collectTransform(function (nums) {
   return uniq(nums)
 })
 
-source.pipe(dedupe)
+var dest = collect({encoding:'object'}, console.log)
 
-dedupe.on('data', function (n) {
-  console.log(n)
-})
+source.pipe(dedupe).pipe(dest)
 ```
 
 outputs

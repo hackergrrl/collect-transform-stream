@@ -14,13 +14,14 @@ module.exports = function (fn) {
 
   function end (flush) {
     var that = this
-
     done = once(done)
-    elements = fn(elements, done)
-    if (elements) done(null, elements)
 
-    function done (err, elements) {
-      elements.forEach(function (elm) {
+    var res = fn(elements, done)
+    if (res) done(null, res)
+
+    function done (err, elms) {
+      // TODO: do something meaningful with err
+      elms.forEach(function (elm) {
         that.push(elm)
       })
       flush()

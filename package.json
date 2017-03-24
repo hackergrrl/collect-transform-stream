@@ -19,8 +19,11 @@
     "through2": "^2.0.3"
   },
   "devDependencies": {
+    "concat-stream": "^1.6.0",
+    "from2": "^2.3.0",
+    "standard": "~8.3.0",
     "tape": "~4.6.2",
-    "standard": "~8.3.0"
+    "uniq": "^1.0.1"
   },
   "license": "ISC"
 }
